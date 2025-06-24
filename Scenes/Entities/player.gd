@@ -61,3 +61,6 @@ func apply_gravity(delta):
 
 func dead() -> void:
 	print("Player is dead")
+
+func hit() -> void:
+	dead()
