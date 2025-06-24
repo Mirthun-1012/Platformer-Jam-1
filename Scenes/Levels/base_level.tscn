@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjjw83rb83on1"]
+
+[ext_resource type="Script" uid="uid://iy04q30r4dly" path="res://Scenes/Levels/base_level.gd" id="1_ssatm"]
+
+[node name="LEVEL" type="Node2D"]
+script = ExtResource("1_ssatm")
+
+[node name="BG" type="Node2D" parent="."]
+
+[node name="bg" type="TileMapLayer" parent="BG"]
+
+[node name="Main" type="Node2D" parent="."]
+
+[node name="platform" type="TileMapLayer" parent="Main"]
+
+[node name="Obstacles" type="Node2D" parent="Main"]
+
+[node name="FallZone" type="Area2D" parent="Main"]
+collision_layer = 4
+
+[node name="FG" type="Node2D" parent="."]
+
+[node name="decor" type="TileMapLayer" parent="."]
+
+[connection signal="body_entered" from="Main/FallZone" to="." method="_on_fall_zone_body_entered"]
