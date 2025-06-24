@@ -113,13 +113,13 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_nwpqr")
 }],
-"loop": true,
+"loop": false,
 "name": &"Shoot",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72y8h"]
-size = Vector2(34, 34)
+size = Vector2(40, 34)
 
 [node name="Electric_Turrent" type="StaticBody2D"]
 collision_layer = 8
@@ -131,6 +131,7 @@ position = Vector2(-13, -4)
 sprite_frames = SubResource("SpriteFrames_ctbg3")
 animation = &"Shoot"
 autoplay = "Idle"
+frame = 18
 speed_scale = 2.3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -140,7 +141,7 @@ polygon = PackedVector2Array(-12, -9, -10, -9, -9, -10, -7, -10, -7, -11, -6, -1
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
-position = Vector2(-30, -5)
+position = Vector2(-33, -5)
 shape = SubResource("RectangleShape2D_72y8h")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

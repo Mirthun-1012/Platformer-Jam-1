@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-""" This Turrent Only shoots once, If needs to reshoot then the player should re-enter the zone """
+# This Turrent Only shoots once, If needs to reshoot then the player should re-enter the zone
 
 
 var can_damage := false

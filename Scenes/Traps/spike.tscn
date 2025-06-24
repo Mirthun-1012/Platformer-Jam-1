@@ -1,0 +1,82 @@
+[gd_scene load_steps=15 format=3 uid="uid://c7qjyvxw3c856"]
+
+[ext_resource type="Script" uid="uid://k2bel3f7xiw5" path="res://Scenes/Traps/spike.gd" id="1_irb7m"]
+[ext_resource type="Texture2D" uid="uid://d3o8a63y3xa1y" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile000.png" id="1_ybv2w"]
+[ext_resource type="Texture2D" uid="uid://bxa1cxas4eywx" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile001.png" id="2_irb7m"]
+[ext_resource type="Texture2D" uid="uid://drlahvgd8ug5h" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile002.png" id="3_ttggu"]
+[ext_resource type="Texture2D" uid="uid://oho63lkqvo1k" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile003.png" id="4_d5rel"]
+[ext_resource type="Texture2D" uid="uid://cda0e7ct1oyks" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile004.png" id="5_rhgjw"]
+[ext_resource type="Texture2D" uid="uid://dn4rdydujtsnk" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile005.png" id="6_iwjhm"]
+[ext_resource type="Texture2D" uid="uid://d4iefvylpntk2" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile006.png" id="7_lpun1"]
+[ext_resource type="Texture2D" uid="uid://b71ai7wdafjo4" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile007.png" id="8_p8t4d"]
+[ext_resource type="Texture2D" uid="uid://bc8shve2ov1ge" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile008.png" id="9_tdvv1"]
+[ext_resource type="Texture2D" uid="uid://dvbtjj3oolv5w" path="res://Assets/Traps/Individual_PNGs/laser_spikes_idle/tile009.png" id="10_a42xw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7cax"]
+size = Vector2(32, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nbiad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ybv2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_irb7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ttggu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d5rel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rhgjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_iwjhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lpun1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_p8t4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tdvv1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_a42xw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dqos"]
+size = Vector2(31, 10)
+
+[node name="Spike" type="StaticBody2D"]
+collision_layer = 8
+script = ExtResource("1_irb7m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -3)
+shape = SubResource("RectangleShape2D_h7cax")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -16)
+sprite_frames = SubResource("SpriteFrames_nbiad")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.399391
+speed_scale = 1.3
+
+[node name="Damage Zone" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage Zone"]
+position = Vector2(1.5, -12)
+shape = SubResource("RectangleShape2D_5dqos")
+
+[connection signal="body_entered" from="Damage Zone" to="." method="_on_damage_zone_body_entered"]
