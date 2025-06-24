@@ -19,6 +19,9 @@ func _physics_process(delta: float) -> void:
 	get_input()
 	apply_movement(delta)
 	apply_gravity(delta)
+	
+	apply_animation()
+
 
 func get_input():
 	
@@ -33,6 +36,17 @@ func get_input():
 	if Input.is_action_just_released("Jump") and velocity.y<0:
 		faster_fall = true
 	#endregion
+
+# Applying animation based on velocity   NOTE: No jump animation played
+func apply_animation():
+	if velocity.x>0:
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.play("Run")
+	elif velocity.x<0:
+		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.play("Run")
+	elif velocity == Vector2.ZERO:
+		$AnimatedSprite2D.play("Idle")
 
 func apply_movement(delta):
 	
