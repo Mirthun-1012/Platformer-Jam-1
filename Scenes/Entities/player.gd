@@ -45,6 +45,13 @@ func apply_animation():
 		state = "Run"
 		$AnimatedSprite2D.flip_h = direction.x < 0
 	
+	print(velocity)
+	if not is_on_floor(): 
+		if velocity.y>311:
+			state = "Fall"
+		else:
+			state = "Jump"
+	
 	$AnimatedSprite2D.play(state)
 
 func apply_movement(delta):
