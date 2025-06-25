@@ -39,14 +39,13 @@ func get_input():
 
 # Applying animation based on velocity   NOTE: No jump animation played
 func apply_animation():
-	if velocity.x>0:
-		$AnimatedSprite2D.flip_h = false
-		$AnimatedSprite2D.play("Run")
-	elif velocity.x<0:
-		$AnimatedSprite2D.flip_h = true
-		$AnimatedSprite2D.play("Run")
-	elif velocity == Vector2.ZERO:
-		$AnimatedSprite2D.play("Idle")
+	var state = 'Idle'
+	
+	if direction.x:
+		state = "Run"
+		$AnimatedSprite2D.flip_h = direction.x < 0
+	
+	$AnimatedSprite2D.play(state)
 
 func apply_movement(delta):
 	
@@ -71,7 +70,6 @@ func apply_gravity(delta):
 		velocity.y += gravity *  1.8 * delta
 	
 	velocity.y = min(velocity.y, terminal_gravity)
-
 
 func dead() -> void:
 	print("Player is dead")
