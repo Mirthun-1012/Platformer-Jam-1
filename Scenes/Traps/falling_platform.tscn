@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnsshrue52mdf"]
+
+[ext_resource type="Script" uid="uid://dl11mb7pvmexk" path="res://Scenes/Traps/falling_platform.gd" id="1_1j6ei"]
+[ext_resource type="Texture2D" uid="uid://blnt6bqrshqyo" path="res://Assets/Traps/falling_platform.png" id="1_fosdb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j6ei"]
+size = Vector2(32, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycuor"]
+size = Vector2(32, 10)
+
+[node name="Falling Platform" type="StaticBody2D"]
+collision_layer = 8
+script = ExtResource("1_1j6ei")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fosdb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1j6ei")
+
+[node name="Player_zone" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_zone"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_ycuor")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Break_wait" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Respawn" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="Player_zone" to="." method="_on_player_zone_body_entered"]
+[connection signal="timeout" from="Timers/Break_wait" to="." method="_on_break_wait_timeout"]
+[connection signal="timeout" from="Timers/Respawn" to="." method="_on_respawn_timeout"]

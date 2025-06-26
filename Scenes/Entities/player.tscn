@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://mpsbkqjfw6ld"]
+[gd_scene load_steps=16 format=3 uid="uid://mpsbkqjfw6ld"]
 
 [ext_resource type="Script" uid="uid://b7qjq2uq0xgw1" path="res://Scenes/Entities/player.gd" id="1_nqm6o"]
 [ext_resource type="Texture2D" uid="uid://bh84r0k82urhh" path="res://Assets/Player.png" id="2_nqm6o"]
@@ -27,29 +27,25 @@ region = Rect2(80, 120, 40, 40)
 atlas = ExtResource("2_nqm6o")
 region = Rect2(120, 120, 40, 40)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqm6o"]
+atlas = ExtResource("2_nqm6o")
+region = Rect2(120, 41, 40, 40)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqx0t"]
 atlas = ExtResource("2_nqm6o")
-region = Rect2(80, 40, 40, 40)
+region = Rect2(0, 81, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofjh0"]
 atlas = ExtResource("2_nqm6o")
-region = Rect2(120, 40, 40, 40)
+region = Rect2(40, 81, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hnfo"]
 atlas = ExtResource("2_nqm6o")
-region = Rect2(0, 80, 40, 40)
+region = Rect2(80, 81, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y18yp"]
 atlas = ExtResource("2_nqm6o")
-region = Rect2(40, 80, 40, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_85s6f"]
-atlas = ExtResource("2_nqm6o")
-region = Rect2(80, 80, 40, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_14y0q"]
-atlas = ExtResource("2_nqm6o")
-region = Rect2(120, 80, 40, 40)
+region = Rect2(120, 81, 40, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f5ba2"]
 animations = [{
@@ -88,6 +84,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_nqm6o")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_yqx0t")
 }, {
 "duration": 1.0,
@@ -98,12 +97,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y18yp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_85s6f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_14y0q")
 }],
 "loop": true,
 "name": &"Run",
@@ -120,9 +113,10 @@ script = ExtResource("1_nqm6o")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_f5ba2")
-animation = &"Jump"
+animation = &"Run"
 autoplay = "Idle"
-frame_progress = 1.0
+frame = 1
+frame_progress = 0.082591
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -2)
@@ -130,3 +124,10 @@ shape = SubResource("RectangleShape2D_nqm6o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+position_smoothing_speed = 2.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Coyot" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
